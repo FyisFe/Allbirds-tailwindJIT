@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Rebuild airbird</title>
+        <link rel="stylesheet" href="./css/tailwind.css" />
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+    <body class="font-poppins" id="app">
+        <div class="bg-lime-800 text-white text-opacity-90 px-4 py-1">
+            <p class="text-xs font-medium text-center">
+                We're raising prices on all products by $1 today in support of the planet.
+                <a href="#" class="underline inline">Learn More</a>
+            </p>
+        </div>
+        <header class="sticky top-0 z-10 bg-white px-5 py-3 flex items-center justify-between">
+            <div class="absolute inset-0 shadow-lg opacity-50"></div>
+
+            <div class="flex">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="{2}" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex">
+                <img class="h-9" src="https://cdn.allbirds.com/image/upload/v1571355713/icons/allbirds-logo.svg" alt="Allbirds" />
+            </div>
+            <div class="flex">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="{2}"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                        />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div>
+                <div class="flex items-center justify-between px-8 pt-4 pb-3">
+                    <div>
+                        <div class="text-xs font-medium space-x-1 text-gray-900">
+                            <a class="underline" href="#">Home</a>
+                            <span>/</span>
+                        </div>
+                        <h1 class="text-lg font-bold text-gray-900">Women's Shoes</h1>
+                    </div>
+                    <div class="flex">
+                        <!-- div to flex or button to be block can solve inline height trap -->
+                        <button class="h-6 w-6">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6 rotate-90 transform"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="{2}"
+                                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="navigator" class="py-3 overflow-x-auto bg-[#F5F5F5] scrollbars-hidden">
+                    <div class="text-sm px-6 inline-flex space-x-5">
+                        <a class="text-gray-800 whitespace-nowrap" v-for="category in categories" :key="index" href="#"> {{category}} </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-6">
+                <div class="flex items-center space-x-4 px-8 py-3 bg-green-700 bg-opacity-20">
+                    <div>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="-ml-2 h-12 w-12 transform rotate-12"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="0.75"
+                                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                            />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex space-x-2">
+                            <h2 class="text-sm font-semibold text-gray-900">Pay It To The Planet</h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                            </svg>
+                        </div>
+                        <p class="text-sm mt-2 text-gray-900 text-opacity-90">Every Black Friday purchase supports Fridays For Future</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-10 py-2 px-8">
+                <div v-for="(product, index) in products" :key="index">
+                    <div>
+                        <div>
+                            <h2 class="text-lg font-semibold">{{product.name}}</h2>
+                            <p class="text-sm text-gray-700">{{product.description}}</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 shadow-xl">
+                        <div class="shadow-lg">
+                            <a href="#">
+                                <div>
+                                    <img :src="product.styles[0].image" :alt="product.styles[0].name" />
+                                </div>
+                                <div class="px-4 pt-3">
+                                    <h3 class="text-sm font-semibold">{{product.name}}</h3>
+                                    <p class="mt-1 text-sm text-gray-800 font-normal">{{product.styles[0].name}}</p>
+                                </div>
+                            </a>
+                            <div class="mt-1 px-4 pb-4">
+                                <div class="flex justify-between">
+                                    <p class="text-sm text-gray-800 font-normal">{{product.styles[index].price}}</p>
+                                    <p class="text-sm text-gray-800 font-normal">{{product.styles.length }} avaliable colors</p>
+                                </div>
+                                <div class="mt-4 flex space-x-4 items-center">
+                                    <button
+                                        class="
+                                            h-6
+                                            w-6
+                                            border border-gray-300
+                                            rounded-full
+                                            overflow-hidden
+                                            flex flex-col
+                                            focus:ring-2 focus:ring-offset-1 focus:ring-gray-900
+                                            focus:outline-none
+                                        "
+                                        :class="i===0?  'ring-2 ring-offset-1 ring-gray-300':''"
+                                        v-for="(style,i) in product.styles.slice(0,6)"
+                                        :key="i"
+                                    >
+                                        <span class="sr-only">{{style.name}}</span>
+                                        <span class="transform -rotate-45 flex flex-col h-full w-full">
+                                            <span class="h-3 w-6" :style="'background-color:' + style.colors[0] "></span>
+                                            <span class="h-3 w-6" :style="'background-color:' + style.colors[1] "></span>
+                                        </span>
+                                    </button>
+                                    <button
+                                        class="
+                                            h-8
+                                            w-8
+                                            border
+                                            rounded-full
+                                            flex
+                                            justify-center
+                                            items-center
+                                            hover:border-gray-400
+                                            focus:outline-none
+                                            focus:ring-1 focus:ring-gray-900
+                                        "
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-4 w-4"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="border-t">
+                                <button class="px-4 py-3 text-sm w-full flex justify-between">
+                                    <span class="font-semibold">Quick Add</span>
+                                    <span
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-6 w-6"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2.5"
+                                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                            />
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="fixed rounded-full overflow-hidden bottom-4 right-6 z-50 w-12 h-12 bg-[#222519]">
+            <button class="border rounded-full overflow-hidden border-white flex w-full h-full justify-center items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 text-white w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1"
+                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                    />
+                </svg>
+            </button>
+        </div>
+        <footer class="bg-[#212a2f] mt-5">
+            <div class="px-6 py-10">
+                <form action="#" method="POST">
+                    <div>
+                        <label class="block text-white font-medium text-sm" for="email_address">Enter your email to stay in touch!</label>
+                        <div class="relative mt-2">
+                            <input
+                                class="
+                                    bg-[#4D5559]
+                                    border-2 border-transparent
+                                    focus:outline-none
+                                    focus:border-white
+                                    w-full
+                                    block
+                                    text-white text-sm
+                                    font-semibold
+                                    transition
+                                "
+                                type="text"
+                            />
+                            <div class="absolute inset-0 border-b-2 border-white pointer-events-none"></div>
+                        </div>
+                    </div>
+                </form>
+                <div class="mt-6">
+                    <button
+                        class="
+                            block
+                            w-full
+                            px-4
+                            py-4
+                            rounded
+                            bg-[#4D5559]
+                            text-white
+                            font-bold
+                            text-sm
+                            uppercase
+                            tracking-wider
+                            hover:bg-white
+                            hover:text-gray-900
+                            focus:bg-white
+                            focus:text-gray-900
+                            focus:outline-none
+                        "
+                        type="submit"
+                    >
+                        Sign up
+                    </button>
+                </div>
+            </div>
+            <div class="space-y-10">
+                <div class="text-center">
+                    <h3 class="text-white text-sm tracking-widest font-bold uppercase">Help</h3>
+                    <ul class="py-3 space-y-2">
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#"> 1-888-963-8944 </a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">1-814-251-9966 (Text)</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">help@allbirds.com</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Returns/Exchanges</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">FAQ/Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                    <h3 class="text-white text-sm tracking-widest font-bold uppercase">Shop</h3>
+                    <ul class="py-3 space-y-2">
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#"> Men's Shoes </a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Women's Shoes</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Men‘s Apparel</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Women‘s Apparel</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Socks</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Gift Cards</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Download the Allbirds App</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                    <h3 class="text-white text-sm tracking-widest font-bold uppercase">Shop</h3>
+                    <ul class="py-3 space-y-2">
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#"> Our Stores </a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Our Story </a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Our Material</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Sustainability</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Partnerships</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Affiliates</a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Bulk Orders </a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Careers </a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">Press </a>
+                        </li>
+                        <li>
+                            <a class="tracking-wider text-white text-xs font-medium" href="#">California Transparency Act </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="text-center px-10">
+                    <h3 class="text-white text-sm tracking-widest font-bold uppercase">Follow the flock</h3>
+                    <p class="py-3 tracking-wider text-white text-[0.67rem] font-medium">
+                        Exclusive offers, a heads up on new things, and sightings of Allbirds in the wild. Oh, we have cute sheep, too.
+                        #weareallbirds
+                    </p>
+
+                    <div class="flex justify-center">
+                        <div class="py-3 w-32 flex justify-between items-center">
+                            <img
+                                src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/7ALf4NFNH4VStmrXU0qSKK/1"
+                                alt="Instgram"
+                            />
+                            <img
+                                src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/7jsrb2oMQypD1kO6iZLXZN/1"
+                                alt="Twitter"
+                            />
+                            <img
+                                src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/55ZLXdMQu728huA78Qlfkb/1"
+                                alt="Facebook"
+                            />
+                            <img
+                                src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/5VBkylibm5XkgzjDP153Mo/1 "
+                                alt="Pinterest"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center">
+                    <img
+                        class="h-32 w-32"
+                        src="https://cdn.allbirds.com/image/upload/q_auto/v1/production/footer/en-US/images/1X4EOQF1JJOjMbo48vDUzB/1"
+                        alt="Certified"
+                    />
+                </div>
+
+                <div class="flex flex-wrap items-center justify-evenly px-6 -mt-2">
+                    <a class="mt-2" href="#">
+                        <img
+                            class="w-[37px] m-1"
+                            src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/3ohqY3WWyehlkYpVi815p9/3"
+                            alt=""
+                        />
+                    </a>
+                    <a class="mt-2" href="#">
+                        <img
+                            class="w-[37px] m-1"
+                            src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/22gqFXi2QPoT2IhEpBuzOi/1"
+                            alt=""
+                        />
+                    </a>
+                    <a class="mt-2" href="#">
+                        <img
+                            class="w-[37px] m-1"
+                            src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/22gqFXi2QPoT2IhEpBuzOi/1"
+                            alt=""
+                        />
+                    </a>
+                    <a class="mt-2" href="#">
+                        <img
+                            class="w-[37px] m-1"
+                            src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/mpzswQHoLPhzgFkXpcZ7P/1"
+                            alt=""
+                        />
+                    </a>
+                    <a class="mt-2" href="#">
+                        <img
+                            class="w-[37px] m-1"
+                            src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/5OVl6dmwlwOJPrg5F3Ot1s/1"
+                            alt=""
+                        />
+                    </a>
+                    <a class="mt-2" href="#">
+                        <img
+                            class="w-[37px] m-1"
+                            src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/2bpMfDa3leuCSpX1lLXKvB/1"
+                            alt=""
+                        />
+                    </a>
+                    <a class="mt-2" href="#">
+                        <img
+                            class="w-[37px] m-1"
+                            src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/5DEtULZUsBHTJp8aXcaOIc/1"
+                            alt=""
+                        />
+                    </a>
+                    <a class="mt-2" href="#">
+                        <img
+                            class="w-[37px] m-1"
+                            src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/6feR4fhJRAICb09saby64I/4"
+                            alt=""
+                        />
+                    </a>
+
+                    <a class="mt-2" href="#">
+                        <img
+                            class="w-[37px] m-1"
+                            src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/7suwpjc6qyFWtaoEgsNleP/2"
+                            alt=""
+                        />
+                    </a>
+                </div>
+
+                <div class="px-10 py-3 text-center tracking-wider text-white text-[0.67rem] font-medium">
+                    © 2021 Allbirds, Inc. All Rights Reserved.
+                    <a href="#" class="underline">Terms</a>, <a href="#" class="underline">Privacy</a> &
+                    <a href="#" class="underline">Accessibility</a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+
+<script>
+    const Navigator = {
+        data() {
+            return {
+                categories: ['Running Shoes', 'Everyday Sneakers', 'Slip-Ons', 'High Tops', 'Flats', 'Wether Repellent Shoes'],
+                products: [
+                    {
+                        name: "Women's Tree Dashers",
+                        description: 'Our running shoe designed with breathable Tree material.',
+                        styles: [
+                            {
+                                name: 'Gaia (White Sole)',
+                                price: '$125',
+                                image: 'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/jquzVZSd9DIuiZeSJV0qk/1',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Neptune (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Terra (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Moonrise (Navy Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#F9A678', '#212E3C'],
+                            },
+                            {
+                                name: 'Eclipse (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#008486'],
+                            },
+                            {
+                                name: 'Brust (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Erupt (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Puukeko (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Bizzard (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#212E3C'],
+                            },
+                            {
+                                name: 'Obsidian (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#06080A'],
+                            },
+                            {
+                                name: 'Quartz (Light Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Thunder (Dark Blue Upper / White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Cyclone (Light Green Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Geyser (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                        ],
+                    },
+
+                    {
+                        name: "Women's Tree Runners",
+                        description: 'Our everyday sneaker made with breezy eucalyptus tree.',
+                        styles: [
+                            {
+                                name: 'Gaia (White Sole)',
+                                price: '$125',
+                                image: 'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/9mrUrX0QSQzPODpMk9xjV/1',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Neptune (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/52dg4kaMol4seXc4OWM8WY/1',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Terra (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Moonrise (Navy Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#F9A678', '#212E3C'],
+                            },
+                            {
+                                name: 'Eclipse (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#008486'],
+                            },
+                            {
+                                name: 'Brust (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Erupt (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Puukeko (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Bizzard (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#212E3C'],
+                            },
+                            {
+                                name: 'Obsidian (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#06080A'],
+                            },
+                            {
+                                name: 'Quartz (Light Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Thunder (Dark Blue Upper / White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Cyclone (Light Green Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Geyser (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                        ],
+                    },
+                    {
+                        name: "Women's Tree Breezers",
+                        description: 'Our classic ballet flat made with breezy eucalyptus tree..',
+                        styles: [
+                            {
+                                name: 'Gaia (White Sole)',
+                                price: '$125',
+                                image: 'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/5YL2T1fJv4LIE5FVzK6Byv/1',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Neptune (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Terra (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Moonrise (Navy Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#F9A678', '#212E3C'],
+                            },
+                            {
+                                name: 'Eclipse (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#008486'],
+                            },
+                            {
+                                name: 'Brust (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Erupt (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Puukeko (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Bizzard (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#212E3C'],
+                            },
+                            {
+                                name: 'Obsidian (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#06080A'],
+                            },
+                            {
+                                name: 'Quartz (Light Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Thunder (Dark Blue Upper / White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Cyclone (Light Green Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Geyser (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                        ],
+                    },
+
+                    {
+                        name: "Women's Wool Runners",
+                        description: 'Our original everyday sneaker made with cozy merino wool.',
+                        styles: [
+                            {
+                                name: 'Gaia (White Sole)',
+                                price: '$125',
+                                image: 'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/52dg4kaMol4seXc4OWM8WY/1',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Neptune (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Terra (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Moonrise (Navy Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#F9A678', '#212E3C'],
+                            },
+                            {
+                                name: 'Eclipse (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#008486'],
+                            },
+                            {
+                                name: 'Brust (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Erupt (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Puukeko (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Bizzard (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#212E3C'],
+                            },
+                            {
+                                name: 'Obsidian (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#06080A'],
+                            },
+                            {
+                                name: 'Quartz (Light Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Thunder (Dark Blue Upper / White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Cyclone (Light Green Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Geyser (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                        ],
+                    },
+
+                    {
+                        name: "Women's Tree Loungers",
+                        description: 'Our casual slip-on made with breezy eucalyptus tree.',
+                        styles: [
+                            {
+                                name: 'Gaia (White Sole)',
+                                price: '$125',
+                                image: 'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_530,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/colorway/en-US/images/4Kk1Y1JCvogrcJJydOVBcn/1',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Neptune (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Terra (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Moonrise (Navy Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#F9A678', '#212E3C'],
+                            },
+                            {
+                                name: 'Eclipse (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#008486'],
+                            },
+                            {
+                                name: 'Brust (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Erupt (Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Puukeko (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Bizzard (White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#212E3C'],
+                            },
+                            {
+                                name: 'Obsidian (Black Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#06080A', '#06080A'],
+                            },
+                            {
+                                name: 'Quartz (Light Grey Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#E4EACB', '#FEC465'],
+                            },
+                            {
+                                name: 'Thunder (Dark Blue Upper / White Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#C7E8E7', '#008486'],
+                            },
+                            {
+                                name: 'Cyclone (Light Green Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                            {
+                                name: 'Geyser (Light Blue Sole)',
+                                price: '$125',
+                                image: 'https://www.allbirds.com/products/womens-tree-dashers-neptune',
+                                colors: ['#333232', '#F9A678'],
+                            },
+                        ],
+                    },
+                ],
+            }
+        },
+    }
+    Vue.createApp(Navigator).mount('#app')
+</script>
