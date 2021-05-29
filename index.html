@@ -84,7 +84,7 @@
         </header>
 
         <main class="lg:mt-16">
-            <div class="lg:grid lg:grid-cols-12">
+            <div class="lg:grid lg:grid-cols-12 container mx-auto">
                 <div class="lg:col-span-3">
                     <div class="flex items-center justify-between px-8 md:px-12 pt-4 pb-3 lg:px-6">
                         <div>
@@ -133,13 +133,57 @@
                             </li>
                         </ul>
                         <div class="mt-9 divide-y-2 divide-gray-500 divide-opacity-20">
-                            <div class="pb-3 flex justify-between items-center">
-                                <h3 class="text-base tracking-widest font-bold capitalize">Filter by</h3>
-                                <span
-                                    :class=" filterList.length === 0? 'hidden' : 'block'"
-                                    class="text-gray-700 font-light underline cursor-pointer capitalize text-sm"
-                                    >clear all</span
-                                >
+                            <div class="pb-3">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-base tracking-widest font-bold capitalize">Filter by</h3>
+                                    <span
+                                        :class=" filterList.length === 0? 'hidden' : 'block'"
+                                        class="text-gray-700 font-light underline cursor-pointer capitalize text-sm"
+                                        @click="filterList.length = 0"
+                                        >clear all</span
+                                    >
+                                </div>
+                                <div>
+                                    <div
+                                        v-for="(filter, index) in filterList"
+                                        :key="index"
+                                        class="
+                                            mt-2
+                                            px-3
+                                            py-1
+                                            mr-4
+                                            border
+                                            rounded-2xl
+                                            border-gray-300
+                                            inline-block
+                                            hover:border-gray-900
+                                            transition
+                                            duration-300
+                                            ease-in-out
+                                        "
+                                    >
+                                        <div class="text-gray-800 flex items-center capitalize whitespace-nowrap text-[0.9rem] font-light">
+                                            <span class="mr-2 flex"> {{filter}} </span>
+
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                class="h-4 w-4 flex"
+                                                fill="rgba(209, 213, 219)"
+                                                viewBox="0 0 24 24"
+                                                stroke="rgba(209, 213, 219)"
+                                                @click="removeFilter(filter)"
+                                            >
+                                                <path
+                                                    stroke="black"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="0.5"
+                                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="py-3">
                                 <h3 class="text-lg tracking-widest font-semibold uppercase">Material</h3>
@@ -148,13 +192,14 @@
                                         v-for="(material, index) in materials"
                                         :key="index"
                                         class="group flex items-center text-sm tracking-wide"
-                                        @click="addFilter(material.name)"
                                     >
                                         <input
                                             class="absolute h-4 w-4 rounded-sm opacity-0"
                                             type="checkbox"
+                                            :value="material.filter"
                                             :name="material.name"
                                             :id="material.name"
+                                            v-model="filterList"
                                         />
                                         <div
                                             class="
@@ -207,7 +252,9 @@
                                             class="absolute h-4 w-4 rounded-sm opacity-0"
                                             type="checkbox"
                                             :name="bestfor"
+                                            :value="bestfor"
                                             :id="bestfor"
+                                            v-model="filterList"
                                         />
                                         <div
                                             class="
@@ -247,6 +294,55 @@
                                         </label>
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="py-3">
+                                <h3 class="text-lg tracking-widest font-semibold uppercase">HUE</h3>
+                                <ul class="pt-3 space-y-3">
+                                    <li
+                                        v-for="(colorInfo, index) in hueList.slice(0,hueLength)"
+                                        :key="index"
+                                        class="group flex items-center text-sm tracking-wide"
+                                    >
+                                        <input
+                                            class="absolute h-4 w-4 rounded-sm opacity-0"
+                                            type="checkbox"
+                                            :name="colorInfo.name"
+                                            :value="colorInfo.name"
+                                            :id="colorInfo.name"
+                                            v-model="filterList"
+                                        />
+                                        <button
+                                            class="
+                                                border
+                                                rounded-full
+                                                border-gray-300
+                                                w-5
+                                                h-5
+                                                mr-5
+                                                flex flex-shrink-0
+                                                justify-center
+                                                items-center
+                                                pointer-events-none
+                                            "
+                                            :class="
+                                            filterList.includes(colorInfo.name) ? 'ring-1 ring-offset-2 ring-gray-400  ': ' group-hover:ring-1 group-hover:ring-offset-2 group-hover:ring-gray-200'
+                                            "
+                                            :style="'background-color:' + colorInfo.color"
+                                        >
+                                            <span class="sr-only">{{colorInfo.name}}</span>
+                                            <span class="h-full w-full">
+                                                <span class="h-3 w-6" :style="'background-color:' + colorInfo.color "></span>
+                                            </span>
+                                        </button>
+                                        <label :for="colorInfo.name">
+                                            <span>{{colorInfo.name}}</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                                <div class="py-3 underline text-sm font-semibold tracking-wider">
+                                    <p v-if="!showAll" @click="showAll = !showAll">See All ({{hueList.length}})</p>
+                                    <p v-else @click="showAll = !showAll">Collapse</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -428,13 +524,21 @@
                 </div>
             </div>
 
-            <div class="bg-[#D3D4D5] mt-12 px-8 md:px-12 py-8 space-y-6 md:py-14 md:space-y-10">
-                <h3 class="capitalize tracking-wider font-bold text-2xl text-gray-900">Explore more women's shoes</h3>
+            <div class="bg-[#D3D4D5] w-full mt-12">
+                <div class="px-8 md:px-12 py-8 md:py-14 md:space-y-10 lg:flex container mx-auto lg:space-y-0 lg:px-2">
+                    <div class="lg:w-1/4 lg:mr-6">
+                        <h3 class="capitalize tracking-wider font-bold text-2xl lg:text-3xl text-gray-900">Explore more women's shoes</h3>
+                    </div>
 
-                <div class="grid grid-cols-2 gap-6 md:grid-cols-3">
-                    <div class="bg-white" v-for="(category, index) in explore" :key="index">
-                        <img :src="category.image" alt="" />
-                        <p class="px-4 py-4 text-gray-900 font-bold tracking-wider">{{category.name}}</p>
+                    <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:w-3/4">
+                        <div class="bg-white" v-for="(category, index) in explore" :key="index">
+                            <a href="#">
+                                <img :src="category.image" alt="" />
+                                <p class="px-4 py-4 text-gray-900 font-bold tracking-wider capitalize lg:text-xl lg:tracking-wide">
+                                    {{category.name}}
+                                </p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -467,7 +571,7 @@
             </button>
         </div>
         <footer class="bg-[#212a2f]">
-            <div class="px-6 py-10">
+            <div class="px-6 py-10 lg:px-12">
                 <form action="#" method="POST">
                     <div>
                         <label class="block text-white font-medium text-sm" for="email_address">Enter your email to stay in touch!</label>
@@ -516,8 +620,8 @@
                     </button>
                 </div>
             </div>
-            <div class="space-y-10">
-                <div class="text-center">
+            <div class="space-y-10 lg:grid lg:grid-cols-10 lg:space-y-0 lg:gap-20 lg:px-12">
+                <div class="text-center lg:col-span-3 lg:text-left">
                     <h3 class="text-white text-sm tracking-widest font-bold uppercase">Help</h3>
                     <ul class="py-3 space-y-2">
                         <li>
@@ -538,7 +642,7 @@
                     </ul>
                 </div>
 
-                <div class="text-center">
+                <div class="text-center lg:col-span-3 lg:text-left">
                     <h3 class="text-white text-sm tracking-widest font-bold uppercase">Shop</h3>
                     <ul class="py-3 space-y-2">
                         <li>
@@ -565,8 +669,8 @@
                     </ul>
                 </div>
 
-                <div class="text-center">
-                    <h3 class="text-white text-sm tracking-widest font-bold uppercase">Shop</h3>
+                <div class="text-center lg:col-span-4 lg:text-left">
+                    <h3 class="text-white text-sm tracking-widest font-bold uppercase">Company</h3>
                     <ul class="py-3 space-y-2">
                         <li>
                             <a class="tracking-wider text-white text-xs font-medium" href="#"> Our Stores </a>
@@ -601,14 +705,14 @@
                     </ul>
                 </div>
 
-                <div class="text-center px-10">
+                <div class="text-center lg:col-span-3 lg:text-left">
                     <h3 class="text-white text-sm tracking-widest font-bold uppercase">Follow the flock</h3>
                     <p class="py-3 tracking-wider text-white text-[0.67rem] font-medium">
                         Exclusive offers, a heads up on new things, and sightings of Allbirds in the wild. Oh, we have cute sheep, too.
                         #weareallbirds
                     </p>
 
-                    <div class="flex justify-center">
+                    <div class="flex justify-center lg:justify-start">
                         <div class="py-3 w-32 flex justify-between items-center">
                             <img
                                 src="https://cdn.allbirds.com/image/upload/q_auto/production/anchorLink/en-US/images/7ALf4NFNH4VStmrXU0qSKK/1"
@@ -629,7 +733,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center justify-center">
+                <div class="flex justify-center lg:col-span-3">
                     <img
                         class="h-32 w-32"
                         src="https://cdn.allbirds.com/image/upload/q_auto/v1/production/footer/en-US/images/1X4EOQF1JJOjMbo48vDUzB/1"
@@ -637,7 +741,7 @@
                     />
                 </div>
 
-                <div class="flex flex-wrap items-center justify-evenly px-6 -mt-2">
+                <div class="flex flex-wrap items-center justify-evenly px-6 -mt-2 lg:col-span-4 lg:px-0 lg:justify-between">
                     <a class="mt-2" href="#">
                         <img
                             class="w-[37px] m-1"
@@ -704,7 +808,7 @@
                     </a>
                 </div>
 
-                <div class="px-10 py-3 text-center tracking-wider text-white text-[0.67rem] font-medium">
+                <div class="px-10 py-3 text-center tracking-wider text-white text-[0.67rem] font-medium lg:col-span-10">
                     © 2021 Allbirds, Inc. All Rights Reserved.
                     <a href="#" class="underline">Terms</a>, <a href="#" class="underline">Privacy</a> &
                     <a href="#" class="underline">Accessibility</a>
@@ -1234,16 +1338,30 @@
                 ],
                 bestFors: ['Everyday', 'Warm Weather', 'Running', 'Cool Weather', 'Wet Weather'],
                 filterList: [],
+                hueList: [
+                    { name: 'White', color: 'rgb(245, 245, 245)' },
+                    { name: 'Gray', color: 'rgb(140, 140, 140);' },
+                    { name: 'Blue', color: 'rgb(73, 96, 124)' },
+                    { name: 'Black', color: 'rgb(59,59,59)' },
+                    { name: 'Green', color: 'rgb(105,113,94)' },
+                    { name: 'Yellow', color: 'rgb(234, 217, 154)' },
+                    { name: 'Red', color: 'rgb(177, 71, 84)' },
+                    { name: 'Brown', color: 'rgb(189, 148, 116)' },
+                    { name: 'Pink', color: 'rgb(223, 171, 181)' },
+                    { name: 'Orange', color: 'rgb(251, 179, 101);' },
+                    { name: 'Beige', color: 'rgb(185, 175, 161)' },
+                ],
+                showAll: false,
             }
         },
         methods: {
-            addFilter(item) {
-                console.log(this.filterList)
-                console.log(item)
-                this.filterList.push(item)
+            removeFilter(item) {
+                this.filterList.splice(this.filterList.indexOf(item), 1)
             },
-            clearFilter() {
-                this.filterList.length = 0
+        },
+        computed: {
+            hueLength() {
+                return this.hueList.length >= 10 && this.showAll ? this.hueList.length : 10
             },
         },
     }
