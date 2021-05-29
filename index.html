@@ -15,7 +15,7 @@
                 <a href="#" class="underline inline">Learn More</a>
             </p>
         </div> -->
-        <header class="sticky top-0 z-10 bg-white px-5 py-3 flex items-center justify-between lg:px-8">
+        <header class="sticky top-0 z-10 bg-white px-5 py-2 flex items-center justify-between lg:px-8">
             <div class="absolute inset-0 shadow-lg opacity-50"></div>
 
             <div class="flex lg:hidden">
@@ -33,7 +33,7 @@
             </ul>
 
             <div class="flex">
-                <img class="h-9 lg:h-10" src="https://cdn.allbirds.com/image/upload/v1571355713/icons/allbirds-logo.svg" alt="Allbirds" />
+                <img class="h-9" src="https://cdn.allbirds.com/image/upload/v1571355713/icons/allbirds-logo.svg" alt="Allbirds" />
             </div>
             <div class="flex lg:hidden">
                 <button>
@@ -83,9 +83,9 @@
             </ul>
         </header>
 
-        <main class="lg:mt-20">
-            <div class="lg:grid lg:grid-cols-8">
-                <div class="lg:col-span-2">
+        <main class="lg:mt-16">
+            <div class="lg:grid lg:grid-cols-12">
+                <div class="lg:col-span-3">
                     <div class="flex items-center justify-between px-8 md:px-12 pt-4 pb-3 lg:px-6">
                         <div>
                             <div class="text-xs font-medium space-x-1 text-gray-900">
@@ -124,7 +124,7 @@
                     <div class="hidden lg:block px-6">
                         <ul>
                             <li
-                                class="text-gray-800 capitalize whitespace-nowrap text-sm font-light py-2"
+                                class="text-gray-800 capitalize whitespace-nowrap text-sm font-light py-2 hover:underline"
                                 v-for="category in categories"
                                 :key="index"
                                 href="#"
@@ -132,6 +132,123 @@
                                 <a href="#"> {{category}} </a>
                             </li>
                         </ul>
+                        <div class="mt-9 divide-y-2 divide-gray-500 divide-opacity-20">
+                            <div class="pb-3 flex justify-between items-center">
+                                <h3 class="text-base tracking-widest font-bold capitalize">Filter by</h3>
+                                <span
+                                    :class=" filterList.length === 0? 'hidden' : 'block'"
+                                    class="text-gray-700 font-light underline cursor-pointer capitalize text-sm"
+                                    >clear all</span
+                                >
+                            </div>
+                            <div class="py-3">
+                                <h3 class="text-lg tracking-widest font-semibold uppercase">Material</h3>
+                                <ul class="pt-3 space-y-2">
+                                    <li
+                                        v-for="(material, index) in materials"
+                                        :key="index"
+                                        class="group flex items-center text-sm tracking-wide"
+                                        @click="addFilter(material.name)"
+                                    >
+                                        <input
+                                            class="absolute h-4 w-4 rounded-sm opacity-0"
+                                            type="checkbox"
+                                            :name="material.name"
+                                            :id="material.name"
+                                        />
+                                        <div
+                                            class="
+                                                bg-white
+                                                border
+                                                rounded-sm
+                                                border-gray-900
+                                                w-4
+                                                h-4
+                                                mr-5
+                                                flex flex-shrink-0
+                                                justify-center
+                                                items-center
+                                            "
+                                        >
+                                            <div class="hidden w-[90%] h-[90%] bg-black">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="white">
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div class="hidden group-hover:block w-[90%] h-[90%] bg-gray-300">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="white">
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <label :for="material.name">
+                                            <span>{{material.name}}</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="py-3">
+                                <h3 class="text-lg tracking-widest font-semibold uppercase">Best for</h3>
+                                <ul class="pt-3 space-y-2">
+                                    <li
+                                        v-for="(bestfor, index) in bestFors"
+                                        :key="index"
+                                        class="group flex items-center text-sm tracking-wide"
+                                    >
+                                        <input
+                                            class="absolute h-4 w-4 rounded-sm opacity-0"
+                                            type="checkbox"
+                                            :name="bestfor"
+                                            :id="bestfor"
+                                        />
+                                        <div
+                                            class="
+                                                bg-white
+                                                border
+                                                rounded-sm
+                                                border-gray-900
+                                                w-4
+                                                h-4
+                                                mr-5
+                                                flex flex-shrink-0
+                                                justify-center
+                                                items-center
+                                            "
+                                        >
+                                            <div class="hidden w-[90%] h-[90%] bg-black">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="white">
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div class="hidden group-hover:block w-[90%] h-[90%] bg-gray-300">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="white">
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <label :for="bestfor">
+                                            <span>{{bestfor}}</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -170,7 +287,7 @@
                     </div>
                 </div> -->
 
-                <div class="space-y-10 py-4 px-8 md:px-12 lg:col-span-6">
+                <div class="space-y-10 py-4 px-8 md:px-12 lg:col-span-9">
                     <div v-for="(product, index) in products" :key="index">
                         <div>
                             <div>
@@ -1105,7 +1222,29 @@
                         image: 'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_1200,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.allbirds.com/image/upload/f_auto,q_auto/v1/production/breadcrumbNavigationNode/en-US/images/37RhAHzyDMH4udsfQhL8uu/1',
                     },
                 ],
+                materials: [
+                    {
+                        name: 'Light & Breezy Tree',
+                        filter: 'Tree',
+                    },
+                    {
+                        name: ' Soft & Cozy Woll',
+                        filter: 'Woll',
+                    },
+                ],
+                bestFors: ['Everyday', 'Warm Weather', 'Running', 'Cool Weather', 'Wet Weather'],
+                filterList: [],
             }
+        },
+        methods: {
+            addFilter(item) {
+                console.log(this.filterList)
+                console.log(item)
+                this.filterList.push(item)
+            },
+            clearFilter() {
+                this.filterList.length = 0
+            },
         },
     }
     Vue.createApp(Navigator).mount('#app')

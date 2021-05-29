@@ -4,6 +4,22 @@
 @tailwind components;
 @tailwind utilities;
 
+input:checked + div {
+    @apply border-gray-900;
+}
+
+input:checked + div div:first-child {
+    @apply block;
+}
+
+input:checked + div div:nth-child(2) {
+    @apply hidden !important;
+}
+
+input:checked ~ label {
+    @apply font-bold;
+}
+
 @layer utilities {
     @responsive {
         .scrollbars-hidden::-webkit-scrollbar {
