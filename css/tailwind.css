@@ -27,3 +27,16 @@ input:checked ~ label {
         }
     }
 }
+
+.slide-enter-active {
+    transition: all 0.5s ease-out;
+}
+
+.slide-leave-active {
+    transition: all 0.5s ease-in;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+    transform: translateY(-100vh);
+}

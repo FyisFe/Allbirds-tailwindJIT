@@ -102,70 +102,102 @@
                 </li>
             </ul>
         </header>
-        <div
-            class="bg-white w-screen transform transition ease-in-out duration-500 text-gray-900"
-            :class='showNavBar ? "" : "-translate-y-full absolute z-10"'
-        >
-            <ul class="divide-y-2">
-                <li class="px-8 py-5">
-                    <div class="flex justify-between items-center">
-                        <a class="text-xs uppercase tracking-wider font-semibold" href="#">Men</a>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    </div>
-                </li>
-                <li class="px-8 py-5">
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-xs uppercase tracking-wider font-semibold">Women</a>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    </div>
-                </li>
-                <li class="px-8 py-5">
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-xs uppercase tracking-wider font-semibold">New Arrivals</a>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    </div>
-                </li>
-                <li class="px-8 py-5">
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-xs uppercase tracking-wider font-semibold">Sustainability</a>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    </div>
-                </li>
-                <li class="px-8 py-5">
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-xs uppercase tracking-wider font-semibold">Stores</a>
-                        <span class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    </div>
-                </li>
-                <li class="px-8 py-5">
-                    <a class="text-xs tracking-wider capitalize" href="#">account</a>
-                </li>
-                <li class="px-8 py-5">
-                    <a class="text-xs tracking-wider capitalize" href="#">help</a>
-                </li>
-            </ul>
-        </div>
-        <div v-if="!showNavBar">
+        <transition name="slide">
+            <div v-if="showNavBar" class="w-screen absolute z-10 bg-white text-gray-900 lg:hidden">
+                <ul class="divide-y-2">
+                    <li class="px-8 py-5 hover:bg-gray-200 cursor-pointer">
+                        <a href="#">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs uppercase tracking-wider font-semibold" href="#">Men</span>
+                                <span>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-4 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="px-8 py-5 hover:bg-gray-200 cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-xs uppercase tracking-wider font-semibold">Women</a>
+                            <span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="px-8 py-5 hover:bg-gray-200 cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-xs uppercase tracking-wider font-semibold">New Arrivals</a>
+                            <span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="px-8 py-5 hover:bg-gray-200 cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-xs uppercase tracking-wider font-semibold">Sustainability</a>
+                            <span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="px-8 py-5 hover:bg-gray-200 cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-xs uppercase tracking-wider font-semibold">Stores</a>
+                            <span class="flex">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="px-8 py-5 hover:bg-gray-200 cursor-pointer">
+                        <a class="text-xs tracking-wider capitalize" href="#">account</a>
+                    </li>
+                    <li class="px-8 py-5 hover:bg-gray-200 cursor-pointer">
+                        <a class="text-xs tracking-wider capitalize" href="#">help</a>
+                    </li>
+                </ul>
+            </div>
+        </transition>
+
+        <div :class="showNavBar? 'hidden lg:block':''">
             <main class="lg:mt-16">
                 <div class="lg:grid lg:grid-cols-12 lg:container lg:mx-auto">
                     <div class="lg:col-span-3">
