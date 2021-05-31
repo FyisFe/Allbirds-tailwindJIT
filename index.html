@@ -15,13 +15,16 @@
                 <a href="#" class="underline inline">Learn More</a>
             </p>
         </div> -->
-        <header class="sticky top-0 z-10 bg-white px-5 py-2 flex items-center justify-between lg:px-8">
+        <header
+            class="top-0 z-20 bg-white flex px-5 py-2 items-center justify-between lg:px-8"
+            :class=" showNavBar ? 'relative w-screen h-12' : 'sticky ' "
+        >
             <div class="absolute inset-0 shadow-lg opacity-50"></div>
 
-            <div class="flex lg:hidden z-10">
+            <div class="flex lg:hidden z-20">
                 <button class="focus:outline-none transform transition ease-in-out" @click="showNavBar = !showNavBar">
                     <svg
-                        v-if="!showNavBar"
+                        v-show="!showNavBar"
                         xmlns="http://www.w3.org/2000/svg"
                         class="h-8 w-8"
                         fill="none"
@@ -30,8 +33,15 @@
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="{2}" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                    <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                        v-show="showNavBar"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-8 w-8"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -92,8 +102,70 @@
                 </li>
             </ul>
         </header>
-        <div v-if="showNavBar"></div>
-        <div v-else>
+        <div
+            class="bg-white w-screen transform transition ease-in-out duration-500 text-gray-900"
+            :class='showNavBar ? "" : "-translate-y-full absolute z-10"'
+        >
+            <ul class="divide-y-2">
+                <li class="px-8 py-5">
+                    <div class="flex justify-between items-center">
+                        <a class="text-xs uppercase tracking-wider font-semibold" href="#">Men</a>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </li>
+                <li class="px-8 py-5">
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-xs uppercase tracking-wider font-semibold">Women</a>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </li>
+                <li class="px-8 py-5">
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-xs uppercase tracking-wider font-semibold">New Arrivals</a>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </li>
+                <li class="px-8 py-5">
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-xs uppercase tracking-wider font-semibold">Sustainability</a>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </li>
+                <li class="px-8 py-5">
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-xs uppercase tracking-wider font-semibold">Stores</a>
+                        <span class="flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </li>
+                <li class="px-8 py-5">
+                    <a class="text-xs tracking-wider capitalize" href="#">account</a>
+                </li>
+                <li class="px-8 py-5">
+                    <a class="text-xs tracking-wider capitalize" href="#">help</a>
+                </li>
+            </ul>
+        </div>
+        <div v-if="!showNavBar">
             <main class="lg:mt-16">
                 <div class="lg:grid lg:grid-cols-12 lg:container lg:mx-auto">
                     <div class="lg:col-span-3">
@@ -126,7 +198,7 @@
                             </div>
                         </div>
                         <div class="py-3 overflow-x-auto bg-[#F5F5F5] scrollbars-hidden lg:hidden">
-                            <div class="text-sm px-8 md:px-12 inline-flex space-x-5">
+                            <div class="text-xs px-8 md:px-12 inline-flex space-x-5">
                                 <a class="text-gray-800 capitalize whitespace-nowrap" v-for="category in categories" :key="index" href="#">
                                     {{category}}
                                 </a>
@@ -879,7 +951,7 @@
     const Navigator = {
         data() {
             return {
-                showNavBar: false,
+                showNavBar: true,
                 categories: [
                     'Running Shoes',
                     'Everyday Sneakers',
