@@ -111,8 +111,8 @@
                                 <span class="text-xs uppercase tracking-wider font-semibold" href="#">Men</span>
                                 <span>
                                     <svg
-                                        xmlns="http://www.w3.org/2000/svg"
                                         class="h-4 w-6"
+                                        xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -633,11 +633,30 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="border-t shadow-xl">
-                                            <button class="px-4 py-3 text-sm w-full flex justify-between">
+                                        <div class="border-t shadow-xl transform transition duration-500 ease-in-out relative">
+                                            <button
+                                                @click="product.isShowQuickAdd = !product.isShowQuickAdd"
+                                                class="px-4 py-3 text-sm w-full flex justify-between focus:outline-none"
+                                            >
                                                 <span class="font-semibold">Quick Add</span>
-                                                <span
-                                                    ><svg
+                                                <span>
+                                                    <svg
+                                                        v-if="product.isShowQuickAdd"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        class="h-6 w-6"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M20 12H4"
+                                                        />
+                                                    </svg>
+                                                    <svg
+                                                        v-else
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         class="h-6 w-6"
                                                         fill="none"
@@ -653,6 +672,30 @@
                                                     </svg>
                                                 </span>
                                             </button>
+
+                                            <div
+                                                class="px-4 flex-1 flex space-x-4 transform transition duration-500 ease-linear"
+                                                :class='product.isShowQuickAdd ? "visible" : "absolute opacity-0 invisible"'
+                                            >
+                                                <button
+                                                    v-for="(item, index) in [5,6,7,8,9,11]"
+                                                    :key="index"
+                                                    class="
+                                                        mb-3
+                                                        h-9
+                                                        w-9
+                                                        hover:bg-gray-300
+                                                        border border-gray-900
+                                                        rounded-sm
+                                                        text-xs
+                                                        flex
+                                                        justify-center
+                                                        items-center
+                                                    "
+                                                >
+                                                    {{item}}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -995,6 +1038,7 @@
                 ],
                 products: [
                     {
+                        isShowQuickAdd: false,
                         name: "Women's Tree Dashers",
                         description: 'Our running shoe designed with breathable Tree material.',
                         description_img:
@@ -1089,6 +1133,7 @@
                     },
 
                     {
+                        isShowQuickAdd: false,
                         name: "Women's Tree Runners",
                         description: 'Our everyday sneaker made with breezy eucalyptus tree.',
                         description_img:
@@ -1182,6 +1227,7 @@
                         ],
                     },
                     {
+                        isShowQuickAdd: false,
                         name: "Women's Tree Breezers",
                         description: 'Our classic ballet flat made with breezy eucalyptus tree..',
                         description_img:
@@ -1276,6 +1322,7 @@
                     },
 
                     {
+                        isShowQuickAdd: false,
                         name: "Women's Wool Runners",
                         description: 'Our original everyday sneaker made with cozy merino wool.',
                         description_img:
@@ -1370,6 +1417,7 @@
                     },
 
                     {
+                        isShowQuickAdd: false,
                         name: "Women's Tree Loungers",
                         description: 'Our casual slip-on made with breezy eucalyptus tree.',
                         description_img:
